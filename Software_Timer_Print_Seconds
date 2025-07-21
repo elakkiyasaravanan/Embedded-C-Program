@@ -1,0 +1,31 @@
+#include <REGX51.H>
+#include <stdio.h>
+
+void delay(void) {
+    unsigned long i;
+    for (i = 0; i < 50000; i++);
+}
+
+char putchar(char c) {
+    SBUF = c;
+    while (TI == 0);
+    TI = 0;
+    return c;
+}
+
+void main(void) {
+    unsigned int time_seconds = 0;
+
+    // UART Initialization
+    SCON = 0x50;
+    TMOD = 0x20;
+    TH1 = 0xFD;
+    TR1 = 1;
+
+    while (1) {
+        printf("Elapsed Time: %us\n", time_seconds);
+        time_seconds++;
+
+        delay();
+    }
+}
