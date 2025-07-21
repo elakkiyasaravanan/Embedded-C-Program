@@ -1,0 +1,8 @@
+#include <reg51.h>
+
+char putchar(char c) {
+    SBUF = c;
+    while (TI == 0);
+    TI = 0;
+    return c;
+}
