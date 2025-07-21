@@ -1,0 +1,27 @@
+#include <REGX51.H>
+#include <stdio.h>
+
+char putchar(char c) {
+    SBUF = c;
+    while (TI == 0);
+    TI = 0;
+    return c;
+}
+
+void main() {
+    unsigned char bcd = 0x25;  // BCD for 25
+    unsigned char binary;
+
+    // UART Initialization
+    SCON = 0x50;
+    TMOD = 0x20;
+    TH1 = 0xFD;
+    TR1 = 1;
+
+    binary = ((bcd >> 4) * 10) + (bcd & 0x0F);
+
+    printf("BCD Value: 0x%X\n", bcd);
+    printf("Binary Value: %d\n", binary);
+
+    while (1);
+}
