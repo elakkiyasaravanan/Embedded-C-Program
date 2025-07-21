@@ -1,0 +1,27 @@
+#include <REGX51.H>
+
+void UART_Init() {
+    TMOD = 0x20;       // Timer1 Mode2
+    TH1 = 0xFD;        // Baud rate 9600
+    SCON = 0x50;       // 8-bit UART, REN enabled
+    TR1 = 1;           // Start Timer1
+}
+
+void UART_Tx(char ch) {
+    SBUF = ch;
+    while (TI == 0);
+    TI = 0;
+}
+
+void main() {
+    UART_Init();
+
+    UART_Tx('H');
+    UART_Tx('E');
+    UART_Tx('L');
+    UART_Tx('L');
+    UART_Tx('O');
+    UART_Tx('\n');
+
+    while (1);
+}
