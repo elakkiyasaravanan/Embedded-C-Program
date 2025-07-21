@@ -1,0 +1,27 @@
+#include <reg51.h>
+
+// Function Prototypes
+void delay_ms(unsigned int ms);
+unsigned char get_dice_number();
+
+void main() {
+    unsigned char dice_value;
+
+    while (1) {
+        dice_value = get_dice_number();  // Get dice number (1-6)
+        P1 = dice_value;                 // Show on Port 1
+        delay_ms(1000);                  // Delay 1 second
+    }
+}
+
+unsigned char get_dice_number() {
+    static unsigned char seed = 3;
+    seed = ((seed + 3) * 11) % 6 + 1;   // Simple pseudo-random generator
+    return seed;
+}
+
+void delay_ms(unsigned int ms) {
+    unsigned int i, j;
+    for (i = 0; i < ms; i++)
+        for (j = 0; j < 1275; j++);
+}
