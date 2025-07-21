@@ -1,0 +1,14 @@
+#include <REGX51.H>
+#include <stdio.h>
+
+void main() {
+    unsigned int counter = 0;
+    unsigned long int i;
+
+    while (1) {
+        counter++;
+        printf("Counter Value: %u\n", counter);
+
+        for (i = 0; i < 50000; i++); // Software delay
+    }
+}
