@@ -1,0 +1,28 @@
+#include <REGX51.H>
+#include <stdio.h>
+#include <string.h>
+
+char putchar(char c) {
+    SBUF = c;
+    while (TI == 0);
+    TI = 0;
+    return c;
+}
+
+void main() {
+    char str[] = "HELLO";
+    char rev[10];
+    int i, len;
+
+    len = strlen(str);
+
+    for (i = 0; i < len; i++) {
+        rev[i] = str[len - i - 1];
+    }
+    rev[len] = '\0';
+
+    printf("Original String: %s\n", str);
+    printf("Reversed String: %s\n", rev);
+
+    while (1);
+}
